@@ -1,0 +1,345 @@
+﻿﻿﻿﻿﻿﻿﻿﻿CREATE TABLE EMP (
+     EMPNO INT PRIMARY KEY,
+	 ENAME VARCHAR(20),
+	 JOB VARCHAR(20),
+	 MGR INT,
+	 HIREDATE DATE,
+	 SAL INT,
+	 COMM INT, 
+	 DEPTNO INT
+)
+
+SELECT * FROM EMP
+
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO) VALUES (7369, 'SMITH', 'CLERK',7902, '17-DEC-2001', 800, 20 )
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO) VALUES (7499, 'ALLEN', 'SALESMAN',7698, '20-FEB-2000', 1600,300, 30 )
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO) VALUES (7521, 'WARD', 'SALESMAN',7698, '22-FEB-2002', 1250,500, 30 )
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO) VALUES (7566, 'JONES', 'MANAGER',7839, '02-APR-1999', 2975, 20 )
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO) VALUES (7654, 'MARTIN', 'SALESMAN',7698, '28-SEP-2002', 1250,1400, 30)
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO) VALUES (7698, 'BLAKE', 'MANAGER',7839, '01-MAY-1998', 2850, 30 )
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO) VALUES (7782, 'CLARK', 'MANAGER',7839, '09-JUN-2001', 2450, 10 )
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO) VALUES (7788, 'SCOTT', 'ANALYST',7566, '19-APR-1997', 3000, 20 )
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO) VALUES (7839, 'KING', 'PRESIDENT',7839, '17-NOV-1995', 5000, 10 )
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO) VALUES (7844, 'TURNER', 'SALESMAN',7698, '08-SEP-2003',1500,0, 30 )
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO) VALUES (7976, 'ADAMS', 'CLERK',7788, '23-MAY-2004', 1100, 20 )
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO) VALUES (7900, 'JAMES', 'CLERK',7698, '03-DEC-2001', 950, 30 )
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO) VALUES (7902, 'FORD', 'ANALYST',7566, '03-DEC-2001', 3000, 20 )
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO) VALUES (7934, 'MILLER', 'CLERK',7782, '23-JAN-2001', 1300, 10 )
+
+-- List the employees in dept 20
+SELECT * FROM EMP WHERE DEPTNO = 20 
+
+-- List the employees earning more than Rs 2500
+SELECT * FROM EMP WHERE SAL > 2500
+
+-- Display all salesmen
+SELECT * FROM EMP WHERE JOB = 'SALESMAN'
+
+-- List the employees in dept 10 & 20
+SELECT * FROM EMP WHERE DEPTNO IN (10, 20)
+
+-- List all the clerks and analysts
+SELECT *  FROM EMP WHERE JOB IN ('CLERK', 'ANALYST')
+
+--LIst all the employees whose name starts with S
+SELECT * FROM EMP WHERE ENAME LIKE 'S%'
+
+--List the employees whose name is having letter L as 2nd character
+SELECT * FROM EMP WHERE ENAME LIKE '_L%' 
+
+--List the employees whose name is having atleast 2 Ls
+SELECT * FROM EMP WHERE ENAME LIKE '%_LL_%'
+
+-- List the employees whose name is having letter E as the last but one character
+SELECT * FROM EMP WHERE ENAME LIKE '%_E_'
+
+-- List all the employees whose name is having letter R in the 3rd position
+SELECT * FROM EMP WHERE ENAME LIKE '__R%'
+
+-- List all the employees who are having exactly 5 characters in their jobs
+SELECT ENAME, JOB FROM EMP WHERE JOB LIKE '_____'
+
+-- List the employees whose name is having atleast 5 characters
+SELECT ENAME FROM EMP WHERE ENAME LIKE '_____'
+
+-- BETWEEN operator  used for searching based on range of values. 
+--List the employees whose salary is between 2000 and 3000
+SELECT * FROM EMP WHERE SAL BETWEEN 2000 AND 3000
+
+-- IS operator  it is used to compare nulls
+-- List all the employees whose commission is null
+SELECT * FROM EMP WHERE COMM IS NULL
+
+-- List all the employees who dont have a reporting manager
+SELECT * FROM EMP WHERE MGR IS NULL
+
+-- LOGICAL OPERATORS
+
+-- List all the salesmen in dept 30
+SELECT * FROM EMP WHERE JOB = 'SALESMAN' AND DEPTNO = 30
+
+--  List all the salesmen in dept number 30 and having salary greater than 1500
+SELECT * FROM EMP WHERE JOB = 'SALESMAN' AND DEPTNO = 30 AND SAL > 1500
+
+--List all the employees whose name starts with ‘s’ or ‘a’
+SELECT * FROM EMP  WHERE ENAME LIKE 'S%' OR ENAME LIKE 'A%'
+
+-- List all the employees except those who are working in dept 10 & 20. 
+SELECT * FROM EMP WHERE DEPTNO NOT IN (10,20)
+
+--  List the employees whose name does not start with ‘S’
+SELECT * FROM EMP WHERE ENAME NOT LIKE 'S%'
+
+-- List all the employees who are having reporting managers in dept 10
+SELECT * FROM EMP WHERE MGR IS NOT NULL AND DDEPTNO = 10
+
+-- List the employees who are not working as managers and clerks in dept 10 and 20 with a salary in the range of 1000 to 3000
+SELECT * FROM EMP WHERE JOB NOT IN ('MANAGER', 'CLERK') AND DEPTNO IN (10,20) AND SAL BETWEEN 1000 AND 3000
+
+-- List the employees whose salary not in the range of 1000 to 2000 in dept 10,20,30 except all salesmen
+SELECT * FROM EMP WHERE SAL NOT BETWEEN 1000 AND 2000 AND DEPTNO IN (10,20,30) AND JOB <> 'SALESMAN'
+
+-- Arrange all the employees by their salary
+SELECT * FROM EMP ORDER BY SAL
+
+--  Arrange all the employees by their salary in the descending order
+SELECT * FROM EMP ORDER BY SAL DESC
+
+-- Arrange ename, sal, job, empno and sort by descending order of salary   
+SELECT ENAME,SAL,JOB, EMPNO FROM EMP ORDER BY 2 DESC
+
+-- DISTINCT VALUES
+SELECT DISTINCT DEPTNO FROM EMP
+
+-- display the maximum salary, minimum salary and total salary from employee
+SELECT MAX(SAL) AS HIGH, MIN(SAL) AS LOW , SUM(SAL) AS TOTAL FROM EMP
+
+-- The below query gives the total number of employees
+SELECT COUNT(*) AS TOTAL, COUNT(EMPNO) AS TOTAL_EMPLOYEE FROM EMP
+
+-- The below query gives the number of employees who have commission
+SELECT COUNT(*) AS TOTAL, COUNT(COMM) AS TOTAL_COMMISSION FROM EMP
+
+--  List the number of employees in department 30
+SELECT COUNT(*) AS COUNT FROM EMP WHERE DEPTNO = 30
+
+-- Display the total salary in department 30
+SELECT SUM(SAL) "TOTAL" FROM EMP WHERE DEPTNO = 30
+
+-- List the number of clerks in department 20
+SELECT COUNT(*) "TOTAL" FROM EMP WHERE DEPTNO = 20 AND JOB = 'CLERK'
+
+-- List the highest and lowest salary earned by salesmen
+SELECT MAX(SAL) "HIGH", MIN(SAL) "LOW" FROM EMP WHERE JOB = 'SALESMAN'
+
+--  Display the total salary of all departments
+SELECT DEPTNO, SUM(SAL) FROM EMP GROUP BY DEPTNO
+
+-- Display the maximum Sal of each job
+SELECT JOB, MAX(SAL) "HIGH" FROM EMP GROUP BY JOB
+
+-- Display job-wise highest salary only if the highest salary is more than Rs1500
+SELECT JOB, MAX(SAL) AS HIGH FROM EMP GROUP BY JOB HAVING MAX(SAL) > 1500
+
+-- Display job-wise highest salary only if the highest salary is more than 1500 excluding department 30. Sort the data based on highest salary in the ascending order
+SELECT JOB, MAX(SAL) AS HIGH FROM EMP WHERE DEPTNO <> 30 GROUP BY JOB HAVING MAX(SAL) > 1500 ORDER BY 2 ASC
+
+-- Display the department numbers along with the number of employees in it
+SELECT DEPTNO, COUNT(*) AS TOTAL FROM EMP GROUP BY DEPTNO ORDER BY DEPTNO
+
+-- Display the department numbers which are having more than 4 employees in them
+SELECT DEPTNO FROM EMP GROUP BY DEPTNO HAVING COUNT(*) > 4 ORDER BY DEPTNO
+
+-- Display the minimum salary for each of the job excluding all the employees whose name ends with ‘S’
+SELECT ENAME, JOB, MIN(SAL) AS MINIMUM FROM EMP WHERE ENAME NOT LIKE '%S' GROUP BY ENAME , JOB ORDER BY 3
+
+-- Display the department numbers which are having more than 9000 as their departmental total salary
+SELECT DEPTNO, SUM(SAL) AS TOTAL FROM EMP GROUP BY DEPTNO HAVING SUM(SAL) > 9000 ORDER BY 1
+
+---------------------------DATEADD---------------------------------------------------
+
+SELECT DATEADD (MONTH,2,'2017/08/25') AS DATEADD -- ---- ADD MONTH
+SELECT DATEADD (MONTH,-2,'2017/08/25') AS DATEADD -- ---- SUBSTRACT MONTH
+SELECT ENAME,HIREDATE,DATEADD(YEAR, 18, HIREDATE) AS DATEADD FROM EMP
+SELECT DATENAME (YEAR, '2017/08/25') AS DATEPARTSTRING
+SELECT DATENAME (MONTH, '2017/08/25') AS DATEPARTSTRING
+SELECT DATENAME (DAY, '2017/08/25') AS DATEPARTSTRING
+SELECT DATENAME (YY, '2017/08/25') AS DATEPARTSTRING
+SELECT DATENAME (MM, '2017/08/25') AS DATEPARTSTRING
+SELECT DATENAME (DD, '2017/08/25') AS DATEPARTSTRING
+SELECT DATENAME (HOUR, '2017/08/25 08:36') AS DATEPARTSTRING
+SELECT DATENAME (MINUTE, '2017/08/25 08:36') AS DATEPARTSTRING
+SELECT DATENAME (SECOND, '2017/08/25 08:36:10') AS DATEPARTSTRING
+
+----------------------------DATEPART-----------------------------------------------
+
+SELECT DATEPART(YEAR,'2017/08/25') AS DATEPARTINT
+SELECT DATEPART(MONTH,'2017/08/25') AS DATEPARTINT
+SELECT DATEPART(DAY,'2017/08/25') AS DATEPARTINT
+SELECT DATEPART(YY,'2017/08/25') AS DATEPARTINT
+SELECT DATEPART(MM,'2017/08/25') AS DATEPARTINT
+SELECT DATEPART(DD, '2017/08/25') "DATEPARTINT"
+
+SELECT YEAR ('2017/08/25') AS DAYOFMONTH
+SELECT MONTH ('2017/08/25') AS DAYOFMONTH
+SELECT DAY ('2017/08/25') AS DAYOFMONTH
+
+------------------- COMPARE ISDATE OR NOT RETURN TRUE OR FALSE 
+
+SELECT ISDATE('2019-08-30') AS KNOW
+SELECT ISDATE('2019-08-32') 
+SELECT ISDATE('2019')
+SELECT MONTH('2017/08/25') AS MONTH
+SELECT YEAR('2017/08/25 09:08') AS YEAR
+SELECT ISDATE('HELLOWORLD!')
+
+
+CREATE TABLE PRODUCTS(
+  PID INT PRIMARY KEY,
+  PNAME VARCHAR(20) NOT NULL,
+  QTY INT CHECK(QTY > 0),
+  DESCRIPTION VARCHAR(20)
+)
+
+SELECT * FROM PRODUCTS
+
+CREATE TABLE ORDERS (
+ PID INT REFERENCES PRODUCTS(PID),
+ ORDER_ID INT PRIMARY KEY,
+ QTY_SOLD INT CHECK(QTY_SOLD > 0),
+ PRICE INT,
+ ORDER_DATE DATE
+ )
+
+ SELECT * FROM ORDERS
+
+ SP_HELP ORDERS
+
+ SELECT * INTO DUMMY FROM EMP
+
+ SELECT * FROM DUMMY 
+
+ TRUNCATE TABLE DUMMY
+ DROP TABLE DUMMY
+
+ ALTER TABLE DUMMY ADD ADDRESS VARCHAR(50)
+
+ ALTER TABLE DUMMY DROP COLUMN ADDRESS
+
+ SP_RENAME 'DUMMY', 'AEIT'
+
+ SELECT * FROM AEIT
+
+ SP_RENAME 'AEIT.ENAME','NAME'
+
+ SP_HELP AEIT
+
+ ALTER TABLE AEIT   --------- TO ADD MULTIPLE COLUMN
+ ADD EMAIL VARCHAR(50),
+     MOBILE_NO VARCHAR(40);
+
+ALTER TABLE AEIT DROP COLUMN EMAIL,MOBILE_NO
+
+ALTER TABLE AEIT -- TO MODIFY COLUMN DATATYPES
+ALTER COLUMN NAME VARCHAR(75) NOT NULL;
+
+SELECT UPPER('shivam') AS CAPITAL_LETTER
+SELECT LOWER('SHIVAM') AS LOWER_LETTER
+SELECT LEN('SHIVAM') AS LENGTH
+
+SELECT 100 + 200
+
+SELECT ENAME, SAL + 100 FROM EMP
+
+SELECT ENAME, LEN(ENAME) AS LENGTH FROM EMP
+
+SELECT * FROM EMP WHERE LEN(ENAME) = 5 AND LEN(JOB) = 5
+
+SELECT ENAME , REPLACE(ENAME, 'A','B') AS REPLACING_A_WITH_B FROM EMP
+
+SELECT ENAME, REPLACE(ENAME,'A', NULL) FROM EMP
+
+SELECT SUBSTRING('SHIVAM',1,3)
+
+SELECT * FROM EMP WHERE SUBSTRING (JOB , 1, 3) = 'MAN'
+
+-- Display the employees whose job ends with ‘man’
+SELECT * FROM EMP WHERE SUBSTRING (JOB,6, 8) = 'MAN'
+
+SELECT ENAME + 'WORKS AS ' + JOB "STATEMENT" FROM EMP
+
+CREATE TABLE DEPT (
+  DEPTNO INT PRIMARY KEY,
+  DNAME VARCHAR(25),
+  LOC VARCHAR(20)
+  )
+  
+  SELECT * FROM DEPT
+
+  INSERT INTO DEPT VALUES (10, 'ACCOUNTING', 'NEW YORK'),
+                            (20,'RESEARCH', 'DALLAS'),
+							(30, 'SALES', 'CHICAGO'),
+							(40,'OPERARIONS', 'BOSTON')
+
+							
+-- List the employees working in ‘Research’ department. 
+SELECT * FROM EMP WHERE DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE DNAME = 'RESEARCH')
+
+-- List the department names that are having analysts
+SELECT * FROM DEPT WHERE DEPTNO IN(SELECT DEPTNO FROM EMP WHERE JOB = 'ANALYST')
+
+-- List the employees in Research and Sales department
+SELECT * FROM EMP WHERE DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE DNAME IN ('RESEARCH', 'SALES'))
+
+-- List the department names which are having salesmen in it. 
+SELECT * FROM DEPT WHERE DEPTNO IN (SELECT DEPTNO FROM EMP WHERE JOB = 'SALESMAN')
+
+--Display the employees whose location is having atleast one ‘O’ in it
+SELECT * FROM EMP WHERE DEPTNO IN(SELECT DEPTNO FROM DEPT WHERE LOC LIKE '%O%') ORDER BY DEPTNO
+
+--List the department names that are having atleast 1 employees in it
+SELECT DNAME FROM DEPT WHERE DEPTNO IN(SELECT DEPTNO FROM EMP GROUP BY DEPTNO HAVING COUNT(*) > 0)
+
+-- List the department names that are having atleast 4 employees in it
+SELECT DNAME FROM DEPT WHERE DEPTNO IN(SELECT DEPTNO FROM EMP GROUP BY DEPTNO HAVING COUNT(*) > 0)
+
+-- Display the department names which are having atleast 2clerks in it
+SELECT DNAME FROM DEPT WHERE DEPTNO IN (SELECT DEPTNO FROM EMP WHERE JOB = 'CLERK' GROUP BY DEPTNO HAVING COUNT('CLERK') = 2)
+
+--  Display the 2nd maximum salary
+SELECT MAX(SAL) "HIGH"FROM EMP WHERE SAL < (SELECT MAX(SAL)"HIGH" FROM EMP)
+
+--  Display the 3rd maximum salary
+SELECT MAX(SAL) AS HIGH FROM EMP WHERE SAL < (SELECT MAX(SAL) FROM EMP WHERE SAL < (SELECT MAX(SAL) FROM EMP))
+
+-- Display the 4th least salary
+SELECT MIN(SAL) "LOW_SALARY" FROM EMP WHERE SAL > (SELECT MIN(SAL) FROM EMP WHERE SAL > (SELECT MIN(SAL) FROM EMP  WHERE SAL > (SELECT MIN(SAL) FROM EMP WHERE SAL > (SELECT MIN(SAL) FROM EMP))) 
+
+-- List the department names that are having no employees at all
+SELECT * FROM DEPT WHERE DEPTNO NOT IN (SELECT DEPTNO FROM EMP);
+
+--JOIN 
+SELECT * FROM EMP A, DEPT B
+
+--INNER JOIN
+SELECT * FROM EMP INNER JOIN DEPT ON EMP.DEPTNO=DEPT.DEPTNO
+--OR
+SELECT A.ENAME, B.DNAME FROM EMP A,DEPT B WHERE A.DEPTNO=B.DEPTNO
+--OR
+SELECT * FROM EMP JOIN DEPT ON EMP.DEPTNO = DEPT.DEPTNO
+
+--LEFT JOIN
+SELECT * FROM EMP LEFT JOIN DEPT ON EMP.DEPTNO=DEPT.DEPTNO
+
+--RIGHT JOIN
+SELECT * FROM EMP RIGHT JOIN DEPT ON EMP.DEPTNO=DEPT.DEPTNO
+
+--MODIFICAION
+SELECT * FROM EMP JOIN DEPT ON EMP.DEPTNO = DEPT.DEPTNO AND EMP.DEPTNO<>10
+
+-- Display employee name and his department name for the employees whose name not starts with ‘S’
+SELECT A.ENAME, B.DNAME FROM EMP A, DEPT B WHERE A.DEPTNO = B.DEPTNO AND A.ENAME NOT LIKE 'S%'
+
+--Display all the department names irrespective of any employee working in it or not. If an employee is working – display his name. 
+
+
